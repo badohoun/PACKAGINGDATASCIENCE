@@ -4,7 +4,7 @@ from pathlib import Path
 import pandas as pd
 
 THIS_DIR = Path(__file__).parent
-OLIST_CUSTOMERS_DATASET_FPATH = THIS_DIR / "../data/olist_customers_dataset.csv"
+OLIST_CUSTOMERS_DATASET_FPATH = THIS_DIR / "olist_customers_dataset.csv"
 
 class IngestData:
     """
