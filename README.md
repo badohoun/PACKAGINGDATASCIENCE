@@ -102,4 +102,23 @@ Alternatives to make as task runners  : just and pyinvoke , Bash
 * just  https://github.com/casey/just
 * pyinvoke  https://www.pyinvoke.org/
 * Bash use Taskfile for AdrianCooney : https://github.com/adriancooney/Taskfile use chmod +x run.sh to render exceutable file track set -e or set -ex help you to debug when to want to install anything you can define  use makefile as  interface over your runsh script 
-* Make you key or credential in security way for exemple if you use .github.com/ethOizzle/shhgit you can views all keys access free in repo public : it's not recommanded 
+* Make you key or credential in security way for exemple if you use .github.com/ethOizzle/shhgit you can views all keys access free in repo public : it's not recommanded because commit is immutable  don't send sensitive : best managing secrets in productions : environnement variables 
+
+
+
+# Github actions continuous delivery 
+
+One kind of event is pull requests which have activity types : pull_request Listeners 
+Triggers we have : 
+React to pull request event : premerge 
+
+postmerge  and push event
+
+Github action context and secret management  : value to access  anytime in workflow 
+
+In the settings in github section secrets and variables 
+Repository secrets is what we interest for 
+
+Access context in workflow  : use github expressions : dollard sign and double bracket
+documentation of contexts in github actions : # https://docs.github.com/en/actions/learn-github-actions/contexts#example-printing-context-information-to-the-log
+Different betweens variables : access a plain test value  printed   and secrets  are not unprinted  : 
