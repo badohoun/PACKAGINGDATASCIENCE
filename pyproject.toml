@@ -28,9 +28,10 @@ dependencies = [
 version = "0.0.0"
 
 [project.optional-dependencies]
-dev = ["ruff" , "mypy" , "black"]
-colors = ["rich"]
-all = ["ingestionpackaging[dev , colors]"]
+test = ["pytest" , "pytest-cov"]
+release = ["build" , "twine"]
+static-code-qa = ["pre-commit"]
+dev = ["ingestionpackaging[test,release , static-code-qa]"]
 
 [tool.black]
 line-length = 119
