@@ -101,4 +101,4 @@ Alternatives to make as task runners  : just and pyinvoke , Bash
 
 * just  https://github.com/casey/just
 * pyinvoke  https://www.pyinvoke.org/
-* Bash use Taskfile for AdrianCooney : https://github.com/adriancooney/Taskfile use chmod +x run.sh to render exceutable file
+* Bash use Taskfile for AdrianCooney : https://github.com/adriancooney/Taskfile use chmod +x run.sh to render exceutable file track set -e or set -ex help you to debug when to want to install anything you can define  use makefile as  interface over your runsh script 
