@@ -83,3 +83,7 @@ I constantly make the integration code available to the users or continuously de
     Waterfall project management : strategy will use to build and delivers a product for end users (like construction happens to  a house , expensive product difficult to change after we construct  to construct house : waterfall method watterfall is linear )
 - Agile : move fast ( Deliver quickly as posssible smallest things you can three days to create prototype  )
 
+# Publishing your package to pypi : python package index  repositoritory 
+Pypi  is immutable : you can replace an existing package  you can never upload the semantic version 
+a second instance for pypi is testpYPI / test.pypi.org : test deployment package . https://pypi.org/
+Twine is a cli we use to publish our paclkaqge to pypi : https://twine.readthedocs.io/en/latest/  twine --help 
