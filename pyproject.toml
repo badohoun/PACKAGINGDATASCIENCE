@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 ingestionpackagingdemo = ["*.csv"]
 
 [project]
-name = "ingestionpackaging"
+name = "ingestionpackaging-demo-espoir"
 authors = [
     {name = "Espoir Badohoun", email = "some-email@gmail.com"},
 ]
@@ -25,12 +25,13 @@ dependencies = [
     
 ]
 #dynamic = ["version"]
-version = "0.0.0"
+version = "0.0.2"
 
 [project.optional-dependencies]
-dev = ["ruff" , "mypy" , "black"]
-colors = ["rich"]
-all = ["ingestionpackaging[dev , colors]"]
+test = ["pytest" , "pytest-cov"]
+release = ["build" , "twine"]
+static-code-qa = ["pre-commit"]
+dev = ["ingestionpackaging[test,release , static-code-qa]"]
 
 [tool.black]
 line-length = 119
