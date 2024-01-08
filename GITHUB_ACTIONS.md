@@ -16,7 +16,7 @@
 
 Dev -> QA/Staging -> Prod
 
-
+Deploy often and earlier and speed  is the general idea that help us to experiment quickly collect feedback  of users  and adapt  
 - 0.0.0rc0
 - 0.0.0rc1
 - 0.0.0a0

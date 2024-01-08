@@ -114,7 +114,7 @@ React to pull request event : premerge
 
 postmerge  and push event
 
-Github action context : value to access  anytime in workflow 
+Github action context and secret management  : value to access  anytime in workflow 
 
 In the settings in github section secrets and variables 
 Repository secrets is what we interest for 
