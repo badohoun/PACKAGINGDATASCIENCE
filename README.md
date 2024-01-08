@@ -1,4 +1,10 @@
 # PACKAGINGDATASCIENCE
+Why packaging ?
+
+1. Distributing Your Code 
+2.  Non-painful import statements 
+3.  Reproducibility and dependencies management specifically 
+
 
 # Packaging terms:
 - Module 
@@ -41,3 +47,39 @@
 3. Document all of the exact version of library and the exact  python version and in addition of that you documented  opération system : m series mcbook , linus ..etc  the solution to this is  if you run pip freeze  : this is most vanilla way in python to freeze or lock your dependencies list : set of the exact version that satisfied constraint pip freeze > requirements.txt useful for developpment reproducibilty  poetry , pip-tools same willl help you .
 4. you can add [project.optional-dependencies]
 dev = ["ruff" , "mypy" , "black"] and after that run in terminal pip install '.[dev]' the same for rich add colors = ["rich] pip install '.[rich]' or pip install '.[colors,dev]' or  all = ["packaging_demo[dev , colors]"] and pip install '.[all]' package index search : snyk.io/advisor/python/package-index ( give you criteria to check package health in terms of security maintenance , community )
+
+
+# IntrotoContinuous Delivery : Publishing to PyPI
+
+* Product management :
+
+ - Objectives , Discovery and Delivery 
+    *1. Product Discovery 
+    Discovery is very much about the intense collaboration of product management, user experience design and ingeieering 
+    In  discovery we are tackling the various risks before we write even one line of production software.
+    The purpose of product discovery is to quickly separate the good ideas from bad. The output of product discovery is a validated product backlog.
+    Specifically, this means getting answers to four critical questions:
+
+      a. Will the user buy this (or choose to use it )?
+      b. Can the user figure out how to use this ?
+      c. Can our engineers build this 
+      d. Can our stakeholders support this ? 
+      Prototypes : Product discovery involves running a series of very quick experiments , and do these experiements quickly and inexpensively, we use prototypes rather than products 
+    *2.  Product  delivery 
+    The purpose of all these prototypes and experiments in discovery is to quickly come up with something that provides some evidence it is worth building and that we can then deliver to our customers.
+    This means the necessary scale , performance reliability fault tolerance security privacy internationalization and localization have been performed and the product works as advetised. The purpose of product delivery is to build and deliver these production-quality technology products something you can sell and run a business on 
+
+Implementing a pipeline that publishes our package to Pypi : a single example of continuous delivery 
+
+Continuous Delivery is a companion to Continuous Integration is the practice  which make small frequents commits to our code base . 
+
+
+I constantly updating the codebase : Continuous integration 
+I constantly make the integration code available to the users or continuously delivery thoses changes to the users 
+
+ ** Devops : Developer Operations  or software developer operations : devops persons try to make software developper work as efficiently as possible (small frequents commits , ci/cd)
+  - Waterfall vs Agile (Design product)
+
+    Waterfall project management : strategy will use to build and delivers a product for end users (like construction happens to  a house , expensive product difficult to change after we construct  to construct house : waterfall method watterfall is linear )
+- Agile : move fast ( Deliver quickly as posssible smallest things you can three days to create prototype  )
+
