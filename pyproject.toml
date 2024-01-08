@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 ingestionpackagingdemo = ["*.csv"]
 
 [project]
-name = "ingestionpackaging"
+name = "ingestionpackaging-demo-espoir"
 authors = [
     {name = "Espoir Badohoun", email = "some-email@gmail.com"},
 ]
@@ -25,7 +25,7 @@ dependencies = [
     
 ]
 #dynamic = ["version"]
-version = "0.0.0"
+version = "0.0.1"
 
 [project.optional-dependencies]
 test = ["pytest" , "pytest-cov"]
