@@ -52,7 +52,7 @@ function publish:test {
 
 
 function publish:prod {
-    try-load-dotenv || true
+    try-load-dotenv 
     twine upload dist/* \
         --repository pypi \
         --username=__token__ \
