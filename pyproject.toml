@@ -21,17 +21,20 @@ classifiers = [
     "Programming Language :: Python :: 3",
 ]
 dependencies = [
-    "pandas"
+    "pandas",
+    'importlib-metadata; python_version<"3.8"',
     
 ]
-#dynamic = ["version"]
-version = "0.0.2"
+dynamic = ["version"]
 
 [project.optional-dependencies]
 test = ["pytest" , "pytest-cov"]
 release = ["build" , "twine"]
 static-code-qa = ["pre-commit"]
-dev = ["ingestionpackaging[test,release , static-code-qa]"]
+dev = ["ingestionpackaging-demo-espoir[test,release , static-code-qa]"]
+
+[tool.setuptools.dynamic]
+version = {file = "version.txt"}
 
 [tool.black]
 line-length = 119

@@ -122,3 +122,25 @@ Repository secrets is what we interest for
 Access context in workflow  : use github expressions : dollard sign and double bracket
 documentation of contexts in github actions : # https://docs.github.com/en/actions/learn-github-actions/contexts#example-printing-context-information-to-the-log
 Different betweens variables : access a plain test value  printed   and secrets  are not unprinted  : 
+
+
+if statements checks in publish yaml file : docs.github.com/en/actions/learn-github-actions/contexts#
+after deployment sucessfull in prod we can tag this 
+
+
+# speed up your workfows or pipeline ci/cd use  dependencies caching  : githubactions cahing 
+
+
+[github.com/actions/cache](https://github.com/actions/cache/blob/main/examples.md#simple-example)
+
+
+- uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt' , '**/project.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+You can set the cache all the emplacement you had pip install 
+
+pass artifacts (upload and downloads) between jobs : github.com/actions/download-artifact
