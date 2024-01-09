@@ -70,17 +70,13 @@ jobs:
            name: wheel-and-sdist
            path: ./dist/*
 
-
-
-
-
   publish:
     needs:
       - build-wheel-and-sdist
       - lint-format-and-static-code-checks
       - check-version-txt
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' 
     steps:
        - uses: actions/checkout@v3
        - name: Set up Python 3.8
