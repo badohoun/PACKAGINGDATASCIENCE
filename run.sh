@@ -23,6 +23,12 @@ function lint {
 }
 
 
+function lint:ci {
+    SKIP=no-commit-to-branch pre-commit run --all-files
+}
+
+
+
 function build {
     python -m build --sdist --wheel "$THIS_DIR/"
 }
@@ -43,7 +49,7 @@ function release:prod {
 
 
 function publish:test {
-    try-load-dotenv 
+    try-load-dotenv  || true
     twine upload dist/* \
         --repository testpypi \
         --username=__token__ \
@@ -52,7 +58,7 @@ function publish:test {
 
 
 function publish:prod {
-    try-load-dotenv 
+    try-load-dotenv || true
     twine upload dist/* \
         --repository pypi \
         --username=__token__ \
@@ -72,6 +78,18 @@ function clean {
       -not -path "./venv/*" \
       -exec rm -r {} +
 }
+
+function try-load-dotenv {
+    if [ ! -f "$THIS_DIR/.env" ]; then
+        echo "no .env file found"
+        return 1
+    fi
+
+    while read -r line; do
+        export "$line"
+    done < <(grep -v '^#' "$THIS_DIR/.env" | grep -v '^$')
+}
+
 
 function help {
     echo "$0 <task> <args>"

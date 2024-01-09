@@ -9,7 +9,42 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-test-and-publish:
+  check-version-txt:
+    runs-on: ubuntu-latest
+    steps:
+       - uses: actions/checkout@v3
+         with:
+           fetch-depth: 0
+       -  name: Tag with the release version 
+          run:  |
+            git tag $(cat version.txt) 
+
+  lint-format-and-static-code-checks:
+    runs-on: ubuntu-latest
+    steps:
+       - uses: actions/checkout@v3
+       - name: Set up Python 3.8
+         uses: actions/setup-python@v3
+         with:
+          python-version: 3.8
+       - uses: actions/cache@v3
+         with:
+            path: ~/.cache/pip
+            key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt' , '**/project.toml') }}
+            restore-keys: |
+              ${{ runner.os }}-pip-
+       -  name: Install pre-commit 
+          run:  |
+            pip install pre-commit 
+       -  name: Lint, Format, and other static code quality checks 
+          run:  |
+            /bin/bash -x run.sh lint:ci
+
+
+
+
+  build-wheel-and-sdist:
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,17 +52,63 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: 3.8
-      - run:  |
-          /bin/bash run.sh install
-          /bin/bash run.sh build
-          /bin/bash run.sh publish:test
-        env:
-          TEST_PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
+      - uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt' , '**/project.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Install build CLI
+        run:  | 
+          pip install build 
+      - name: Build Python package 
+        run:  |
+          /bin/bash -x run.sh build
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@v3
+        with:
+           name: wheel-and-sdist
+           path: ./dist/*
 
 
 
 
 
+  publish:
+    needs:
+      - build-wheel-and-sdist
+      - lint-format-and-static-code-checks
+      - check-version-txt
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+       - uses: actions/checkout@v3
+       - name: Set up Python 3.8
+         uses: actions/setup-python@v3
+         with:
+          python-version: 3.8
+       - uses: actions/cache@v3
+         with:
+            path: ~/.cache/pip
+            key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt' , '**/project.toml') }}
+            restore-keys: |
+              ${{ runner.os }}-pip-
+       -  name: Install twine
+          run:  |
+            pip install twine 
+       -  name: Publish to Test PyPI
+          run:  |
+            /bin/bash -x run.sh publish:test
+          env:
+            TEST_PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
+       -  name: Publish to Prod PyPI
+          run:  |
+             /bin/bash -x run.sh publish:prod
+          env:
+            PROD_PYPI_TOKEN: ${{ secrets.PROD_PYPI_TOKEN }}
+       -  name: Push tags 
+          run:  |
+            git push origin --tags
 
 
 
